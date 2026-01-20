@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelligent Stem Separator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Intelligent Stem Separator</h1>
+        <p>Upload your audio file to separate stems (Vocals / Accompaniment).</p>
+        
+        <div id="drop-zone" class="drop-zone">
+            <p>Drag & Drop Audio File Here or Click to Select</p>
+            <input type="file" id="file-input" accept="audio/*" hidden>
+        </div>
+
+        <div id="progress-area" class="hidden">
+            <p id="status-text">Uploading...</p>
+            <div class="loader"></div>
+        </div>
+
+        <div id="results-area" class="hidden">
+            <h2>Results</h2>
+            <div id="links-container"></div>
+            <button id="reset-btn">Separate Another File</button>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

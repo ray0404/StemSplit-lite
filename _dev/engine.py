@@ -20,8 +20,7 @@ class StemEngine:
         if not os.path.exists(input_path):
             raise FileNotFoundError(f"Input file not found: {input_path}")
 
-        if not os.path.exists(output_dir):
-            os.makedirs(output_dir)
+        os.makedirs(output_dir, exist_ok=True)
 
         print(f"[Process] Separating: {os.path.basename(input_path)}")
         

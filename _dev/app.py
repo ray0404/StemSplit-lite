@@ -57,11 +57,11 @@ async def check_status(song_name: str):
     Simple polling mechanism.
     """
     target_dir = os.path.join(OUTPUT_DIR, song_name)
-    if os.path.exists(target_dir) and len(os.listdir(target_dir)) > 0:
+    if os.path.exists(target_dir):
         files = os.listdir(target_dir)
-        return {"status": "completed", "files": files}
-    else:
-        return {"status": "processing"}
+        if len(files) > 0:
+            return {"status": "completed", "files": files}
+    return {"status": "processing"}
 
 @app.get("/download/{song_name}/{stem}")
 async def download_stem(song_name: str, stem: str):

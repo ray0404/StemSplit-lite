@@ -31,6 +31,13 @@ def run_separation(file_path: str, output_path: str):
     except Exception as e:
         print(f"Error processing {file_path}: {e}")
 
+def save_upload_file(file_src, dest_path):
+    """
+    Helper to save file in a thread-safe way (blocking I/O).
+    """
+    with open(dest_path, "wb") as buffer:
+        shutil.copyfileobj(file_src, buffer)
+
 @app.post("/upload")
 async def upload_file(file: UploadFile = File(...), background_tasks: BackgroundTasks = None):
     filename = file.filename
@@ -38,8 +45,7 @@ async def upload_file(file: UploadFile = File(...), background_tasks: Background
     file_location = os.path.join(INPUT_DIR, safe_filename)
     
     # Save the uploaded file
-    with open(file_location, "wb") as buffer:
-        shutil.copyfileobj(file.file, buffer)
+    await asyncio.to_thread(save_upload_file, file.file, file_location)
         
     # Create a specific output directory for this file (e.g. based on name)
     # Spleeter creates a folder with the song name in the output directory

@@ -1,1 +1,7 @@
 blueprints/
+__pycache__/
+*.pyc
+inputs/*
+!inputs/.gitkeep
+outputs/*
+!outputs/.gitkeep

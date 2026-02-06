@@ -80,7 +80,8 @@ async def download_stem(song_name: str, stem: str):
     raise HTTPException(status_code=404, detail="File not found")
 
 # Mount static files for the frontend
-app.mount("/", StaticFiles(directory="static", html=True), name="static")
+STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+app.mount("/", StaticFiles(directory=STATIC_DIR, html=True), name="static")
 
 if __name__ == "__main__":
     import uvicorn
